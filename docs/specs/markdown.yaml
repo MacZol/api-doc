@@ -1,181 +1,1724 @@
-openapi: 3.0.0
+openapi: "3.0.0"
 info:
-  title: Markdown Content
-  description: Test case to show markdown support. For more info check specification (http://spec.openapis.org/oas/v3.0.3)
-  version: 1.0.0
+  description: "Metadata service API documentation"
+  title: "Metadata service API"
+  version: "0.0.1"
+components:
+  schemas:
+    SERIAL:
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          type: "string"
+          enum:
+            - "SERIAL"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "string"
+          format: "date-time"
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+    SERIAL_PART:
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          type: "string"
+          enum:
+            - "SERIAL_PART"
+        serialPartSequenceNumber:
+          description: "The ordering of this sequence part within the serial.\nLike 'Series *1*'"
+          type: "integer"
+          minimum: 1
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "string"
+          format: "date-time"
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+        parentSerialId:
+          description: "If this is a serial part or special episode, then it needs a parent serial id to point to."
+          type: "integer"
+          minimum: 0
+    SERIAL_EPISODE:
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          type: "string"
+          enum:
+            - "SERIAL_EPISODE"
+        episodeSequenceNumber:
+          description: "An episode has a sequence number, 'Episode *2*' for example."
+          type: "integer"
+          minimum: 1
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "string"
+          format: "date-time"
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+        parentSerialPartId:
+          description: "If this is a serial episode, then it will have a parent serial part id."
+          type: "integer"
+          minimum: 1
+    SPECIAL_EPISODE:
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          type: "string"
+          enum:
+            - "SPECIAL_EPISODE"
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "string"
+          format: "date-time"
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+        parentSerialId:
+          description: "If this is a serial part or special episode, then it needs a parent serial id to point to."
+          type: "integer"
+          minimum: 0
+    STANDALONE:
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          type: "string"
+          enum:
+            - "STANDALONE"
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "string"
+          format: "date-time"
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+    OTTSerialDisplayType.SerialDisplayType:
+      enum:
+        - "LIMITED_SERIES"
+        - "TV_SHOW"
+        - "VOLUME"
+      type: "string"
+    OTTLanguage.Alpha2LanguageCode:
+      enum:
+        - "aa"
+        - "ab"
+        - "ae"
+        - "af"
+        - "ak"
+        - "am"
+        - "an"
+        - "ar"
+        - "as"
+        - "av"
+        - "ay"
+        - "az"
+        - "ba"
+        - "be"
+        - "bg"
+        - "bh"
+        - "bi"
+        - "bm"
+        - "bn"
+        - "bo"
+        - "br"
+        - "bs"
+        - "ca"
+        - "ce"
+        - "ch"
+        - "co"
+        - "cr"
+        - "cs"
+        - "cu"
+        - "cv"
+        - "cy"
+        - "da"
+        - "de"
+        - "dv"
+        - "dz"
+        - "ee"
+        - "el"
+        - "en"
+        - "eo"
+        - "es"
+        - "et"
+        - "eu"
+        - "fa"
+        - "ff"
+        - "fi"
+        - "fj"
+        - "fo"
+        - "fr"
+        - "fy"
+        - "ga"
+        - "gd"
+        - "gl"
+        - "gn"
+        - "gu"
+        - "gv"
+        - "ha"
+        - "he"
+        - "hi"
+        - "ho"
+        - "hr"
+        - "ht"
+        - "hu"
+        - "hy"
+        - "hz"
+        - "ia"
+        - "id"
+        - "ie"
+        - "ig"
+        - "ii"
+        - "ik"
+        - "io"
+        - "is"
+        - "it"
+        - "iu"
+        - "ja"
+        - "jv"
+        - "ka"
+        - "kg"
+        - "ki"
+        - "kj"
+        - "kk"
+        - "kl"
+        - "km"
+        - "kn"
+        - "ko"
+        - "kr"
+        - "ks"
+        - "ku"
+        - "kv"
+        - "kw"
+        - "ky"
+        - "la"
+        - "lb"
+        - "lg"
+        - "li"
+        - "ln"
+        - "lo"
+        - "lt"
+        - "lu"
+        - "lv"
+        - "mg"
+        - "mh"
+        - "mi"
+        - "mk"
+        - "ml"
+        - "mn"
+        - "mr"
+        - "ms"
+        - "mt"
+        - "my"
+        - "na"
+        - "nb"
+        - "nd"
+        - "ne"
+        - "ng"
+        - "nl"
+        - "nn"
+        - "no"
+        - "nr"
+        - "nv"
+        - "ny"
+        - "oc"
+        - "oj"
+        - "om"
+        - "or"
+        - "os"
+        - "pa"
+        - "pi"
+        - "pl"
+        - "ps"
+        - "pt"
+        - "qu"
+        - "rm"
+        - "rn"
+        - "ro"
+        - "ru"
+        - "rw"
+        - "sa"
+        - "sc"
+        - "sd"
+        - "se"
+        - "sg"
+        - "si"
+        - "sk"
+        - "sl"
+        - "sm"
+        - "sn"
+        - "so"
+        - "sq"
+        - "sr"
+        - "ss"
+        - "st"
+        - "su"
+        - "sv"
+        - "sw"
+        - "ta"
+        - "te"
+        - "tg"
+        - "th"
+        - "ti"
+        - "tk"
+        - "tl"
+        - "tn"
+        - "to"
+        - "tr"
+        - "ts"
+        - "tt"
+        - "tw"
+        - "ty"
+        - "ug"
+        - "uk"
+        - "ur"
+        - "uz"
+        - "ve"
+        - "vi"
+        - "vo"
+        - "wa"
+        - "wo"
+        - "xh"
+        - "yi"
+        - "yo"
+        - "za"
+        - "zh"
+        - "zu"
+      type: "string"
+    OTTColorScheme.ColorSchemeSlug:
+      enum:
+        - "black_and_white"
+        - "color"
+      type: "string"
+    OTTOriginalReleaseFormat.OriginalReleaseFormatSlug:
+      enum:
+        - "DVD_DISK"
+        - "OTT_RELEASE"
+        - "PRE_RECORDED_TV_BROADCAST"
+        - "THEATRE"
+      type: "string"
+    OTTVendorContentAgreement.AgreementSlug:
+      enum:
+        - "licensed"
+        - "original"
+        - "other"
+        - "unknown"
+      type: "string"
+    OTTContentRatingBoard.RatingPair:
+      type: "object"
+      properties:
+        board:
+          $ref: "#/components/schemas/OTTContentRatingBoard.RatingBoardSlug"
+        ratingValue:
+          type: "string"
+    OTTContentRatingBoard.RatingBoardSlug:
+      enum:
+        - "ABMC"
+        - "ACRB"
+        - "ARGENTINA_INCAA"
+        - "BBFC"
+        - "BFC"
+        - "BRAZIL"
+        - "CANADA_TV"
+        - "CHILE_FILM"
+        - "CHVRS"
+        - "CICF"
+        - "COLOMBIA_FILM"
+        - "CSA"
+        - "CSCF"
+        - "DMCCYP"
+        - "EIRIN"
+        - "FBC"
+        - "FRISK"
+        - "FSF"
+        - "FSK"
+        - "GB_GUIDANCE"
+        - "ICAA"
+        - "IE_GUIDANCE"
+        - "IFCO"
+        - "IGAC"
+        - "KCC"
+        - "KMRB"
+        - "MEKU_ADVISORIES"
+        - "MEKU_AGE"
+        - "MEKU_TV_AGE"
+        - "MEXICO_FILM"
+        - "MEXICO_TV"
+        - "MIBAC"
+        - "MPAA"
+        - "NICAM_ADVISORIES"
+        - "NICAM_AGE"
+        - "NMA_AGE"
+        - "NMA_FORMER"
+        - "NMA_SUITABILITY"
+        - "NORWAY_TV_WATERSHED"
+        - "NZFVLB"
+        - "PORTUGAL_TV"
+        - "SMC"
+        - "SPAIN_TV"
+        - "US_TV"
+      type: "string"
 paths:
-  /markdown:
+  /content/{id}/v1:
     get:
-      summary: Markdown in Description. 
-      description: |
-        Endpoint to create and initiate a pipeline. 
-
-        ### Paragraph
-        In a hole in the ground there lived a hobbit. Not a **nasty**, _dirty_, `wet` hole, filled with the ends
-        of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to
-        eat: it was a [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles"), and that means comfort.
-
-
-        ### Horizontal Rule `---`
-        ---
-
-        ### Number List
-        1. Install `node`.
-        2. Install `npm`.
-        3. Open your editor
-        4. Create a JavaScript file
-
-        ### Blockquotes
-        > This is a sample OpenAPI spec to test the parsing of various markdown styles
-        > (RapiDoc supports common-mark syntax)
-
-        ### Buleted List
-        - Install `node`.
-        - Install `npm`.
-        - Open you editor
-        - Create a JavaScript file
-
-        ### Table
-        | Heading 1 | Left-Justified | Centered | Right-Justified |
-        | --------- | :------------- | :------: | --------------: |
-        | text | text | text | text |
-        | text | text | text | text |
-        | text | text | text | text |
-
-        ### Code
-        ```
-        $ curl -X POST -is -u username:password 
-          -H "Content-Type: application/json" https://example.com
-          -d '{
-          "target": {
-            "ref_type": "branch", 
-            "type": "pipeline_ref_target", 
-            "ref_name": "master"
-          }'
-        }
-        ```
-        ### Code (with syntax highlight)
-        ```bash
-        $ curl -X POST -is -u username:password 
-          -H "Content-Type: application/json" https://example.com
-          -d '{
-          "target": {
-            "ref_type": "branch", 
-            "type": "pipeline_ref_target", 
-            "ref_name": "master"
-          }'
-        }
-        ```
-
-        ### Images 
-        Inline Images no-gap - ![appspot image filler](http://ipsumimage.appspot.com/100)![appspot image filler](http://ipsumimage.appspot.com/100)
-
-        Inline Images Single space gap - ![appspot image filler](http://ipsumimage.appspot.com/100)
-        ![appspot image filler](http://ipsumimage.appspot.com/100)
-
-        Next Line Image
-        
-        ![appspot image filler](http://ipsumimage.appspot.com/140x100.png)
-
       parameters:
-        - name: full-name
-          in: query
-          description: |
-           Field descriptions can contain `Markdown` (Markdown must be monospaced)<br/>
-           **CONSTRAINTS** 
-           ```
-            - At least 3 characters
-            - Cannot have space
-            - Cannot have number
-            - First Letter must be capital
-           ```
+        - name: "id"
+          in: "path"
           required: true
+          description: "Id of the piece of content to get."
           schema:
-            type: string
-            minimum: 3
-        - name: height
-          in: query
-          description: Height in `inches` (inches must be monospaced)
-          required: true
-          schema:
-            type: integer
-            format: int32
-            minimum: 12
-            maximum: 120
-        - name: interests
-          in: query
-          required: true
-          description: |
-            Default is `hiking` (hiking must be monospaced)
-            
-            | Heading 1 | Left-Justified | Centered | Right-Justified |
-            | --------- | :------------- | :------: | --------------: |
-            | text | text | text | text |
-            | text | text | text | text |
-            | text | text | text | text |
-
-          schema:
-            type: array
-            minItems: 1
-            maxItems: 3
-            items:
-              type: string
-              enum:
-                - computers
-                - hiking
-                - swiming
-              default: hiking 
-
+            type: "integer"
       responses:
-        '200':
-          description: Response Schema field contains `Markdown` contents  (Markdown must be monospaced)
+        200:
+          description: "got the content successfully."
           content:
             application/json:
               schema:
-                type: object
-                description: Description of `Person` object (Person must be monospaced)
-                properties:
-                  fullName:
-                    description: Person's Full name is made up of `firstName` and `lastName` (firstName and lastName must be mono-spaced).
-                    type: object
-                    properties:
-                      firstName:
-                        description: _First name_ (First name should be italics)
-                        type: string
-                      lastName:
-                        description: |
-                          `Last name` (last name must be monospaced)
-                        type: string
-                  dependentNames:
-                    type: array
-                    description: Array of **Dependents** (Dependents must be bold).
-                    items:
-                      type: object
-                      description: Full Name Object is made up of `firstName` and `lastName` (firstName and lastName must be mono-spaced).
-                      properties:
-                        fullName:
-                          description: Parts of **First Name** (First Name must be bold)
-                          type: object
-                          properties:
-                            firstName:
-                              description: Dependent First Name
-                              type: string
-                            lastName:
-                              description: Dependent Last Name
-                              type: string
-          headers:                  
-            Link:
-              required: true
-              schema:
-                type: string
-              description: |
-                Pagination links are included in the Link header of responses.
-                It is important to follow these Link header values instead of constructing your own URLs as query parameters or cursor formats may change without notice.
-
-                | Link Relation | Description                                         |
-                |:--------------|:----------------------------------------------------|
-                | first         | The URL of the immediate first page of results      |
-                | last          | The URL of the immediate last page of results       |
-                | next          | The URL of the immediate next page of results       |
-                | prev          | The URL of the immediate previous page of results   |
-                | self          | The URL of the immediate current page of results    |
+                $ref: "#/components/schemas/SERIAL"
+        400:
+          description: "there was an error getting the content"
+        404:
+          description: "could not find the content"
