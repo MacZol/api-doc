@@ -267,8 +267,11 @@ components:
           minimum: 0
         dateAddedToPlatform:
           description: "Date this piece of content was added to the platform."
-          type: "string"
-          format: "date-time"
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
         contentRatings:
           description: "Content ratings\nInherited across child content."
           type: "array"
@@ -283,10 +286,6 @@ components:
               - "SEXUAL_VIOLENCE"
               - "STROBE_LIGHTING"
             type: "string"
-        mainImageId1:
-          description: "Id of the main poster image in the image service."
-          type: "integer"
-          minimum: 0
     SERIAL_PART:
       type: "object"
       properties:
@@ -553,8 +552,11 @@ components:
           minimum: 0
         dateAddedToPlatform:
           description: "Date this piece of content was added to the platform."
-          type: "string"
-          format: "date-time"
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
         contentRatings:
           description: "Content ratings\nInherited across child content."
           type: "array"
@@ -569,10 +571,6 @@ components:
               - "SEXUAL_VIOLENCE"
               - "STROBE_LIGHTING"
             type: "string"
-        mainImageId1:
-          description: "Id of the main poster image in the image service."
-          type: "integer"
-          minimum: 0
         parentSerialId:
           description: "If this is a serial part or special episode, then it needs a parent serial id to point to."
           type: "integer"
@@ -843,8 +841,11 @@ components:
           minimum: 0
         dateAddedToPlatform:
           description: "Date this piece of content was added to the platform."
-          type: "string"
-          format: "date-time"
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
         contentRatings:
           description: "Content ratings\nInherited across child content."
           type: "array"
@@ -859,10 +860,6 @@ components:
               - "SEXUAL_VIOLENCE"
               - "STROBE_LIGHTING"
             type: "string"
-        mainImageId1:
-          description: "Id of the main poster image in the image service."
-          type: "integer"
-          minimum: 0
         parentSerialPartId:
           description: "If this is a serial episode, then it will have a parent serial part id."
           type: "integer"
@@ -1129,8 +1126,11 @@ components:
           minimum: 0
         dateAddedToPlatform:
           description: "Date this piece of content was added to the platform."
-          type: "string"
-          format: "date-time"
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
         contentRatings:
           description: "Content ratings\nInherited across child content."
           type: "array"
@@ -1145,10 +1145,6 @@ components:
               - "SEXUAL_VIOLENCE"
               - "STROBE_LIGHTING"
             type: "string"
-        mainImageId1:
-          description: "Id of the main poster image in the image service."
-          type: "integer"
-          minimum: 0
         parentSerialId:
           description: "If this is a serial part or special episode, then it needs a parent serial id to point to."
           type: "integer"
@@ -1415,8 +1411,11 @@ components:
           minimum: 0
         dateAddedToPlatform:
           description: "Date this piece of content was added to the platform."
-          type: "string"
-          format: "date-time"
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
         contentRatings:
           description: "Content ratings\nInherited across child content."
           type: "array"
@@ -1431,10 +1430,78 @@ components:
               - "SEXUAL_VIOLENCE"
               - "STROBE_LIGHTING"
             type: "string"
-        mainImageId1:
-          description: "Id of the main poster image in the image service."
-          type: "integer"
-          minimum: 0
+    CONTENT_PAGE_REQUEST:
+      type: "object"
+      properties:
+        filters:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              type:
+                type: "string"
+                enum:
+                  - "METAFIELD"
+              field:
+                $ref: "#/components/schemas/OTTCommonContentMeta.OnlySimpleFields"
+              value:
+                type: "string"
+              operator:
+                type: "string"
+                enum:
+                  - "EQUALS"
+        pagination:
+          type: "object"
+          properties:
+            perPageLimit:
+              type: "number"
+            pageNumber:
+              type: "number"
+            initialCreationTime:
+              type: "number"
+            correlationToken:
+              type: "string"
+    CONTENT_PAGE_RESPONSE:
+      type: "object"
+      properties:
+        filters:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              type:
+                type: "string"
+                enum:
+                  - "METAFIELD"
+              field:
+                $ref: "#/components/schemas/OTTCommonContentMeta.OnlySimpleFields"
+              value:
+                type: "string"
+              operator:
+                type: "string"
+                enum:
+                  - "EQUALS"
+        pagination:
+          type: "object"
+          properties:
+            perPageLimit:
+              type: "number"
+            pageNumber:
+              type: "number"
+            initialCreationTime:
+              type: "number"
+            correlationToken:
+              type: "string"
+        resolvedItems:
+          description: "An array of content that has already been created - such as a list of series in a serial."
+          type: "array"
+          items:
+            allOf:
+              - $ref: "#/components/schemas/OTTCommonContentMeta.Core"
+              - type: "object"
+                properties:
+                  _id:
+                    type: "string"
     OTTSerialDisplayType.SerialDisplayType:
       enum:
         - "LIMITED_SERIES"
@@ -1701,24 +1768,497 @@ components:
         - "SPAIN_TV"
         - "US_TV"
       type: "string"
+    OTTCommonContentMeta.OnlySimpleFields:
+      description: "A set of fields which are simple 1 line fields."
+      enum:
+        - "_id"
+        - "asinId"
+        - "colorScheme"
+        - "contentType"
+        - "copyrightLine"
+        - "dateAddedToPlatform"
+        - "eanId"
+        - "eidrId"
+        - "firstReleaseDate"
+        - "gvdId"
+        - "imdbId"
+        - "ingestedExternalCatalogueId"
+        - "mainImageId1"
+        - "metadataLanguage"
+        - "metadataPublished"
+        - "order"
+        - "originCountry"
+        - "originalMainLangauge"
+        - "originalReleaseFormat"
+        - "serialDisplayType"
+        - "shortDescription"
+        - "synopsis"
+        - "title"
+        - "vendorContentAgreement"
+      type: "string"
+    OTTCommonContentMeta.Core:
+      description: "Makes some fields always required."
+      type: "object"
+      properties:
+        contentType:
+          description: "The type of this piece of content."
+          enum:
+            - "SERIAL"
+            - "SERIAL_EPISODE"
+            - "SERIAL_PART"
+            - "SPECIAL_EPISODE"
+            - "STANDALONE"
+          type: "string"
+        title:
+          description: "The display title of the piece of content"
+          type: "string"
+        metadataLanguage:
+          description: "Language code the piece of meta is entered in as.\nIf meta is requested in a different language in the future, service knows not to serve this content."
+          enum:
+            - "aa"
+            - "ab"
+            - "ae"
+            - "af"
+            - "ak"
+            - "am"
+            - "an"
+            - "ar"
+            - "as"
+            - "av"
+            - "ay"
+            - "az"
+            - "ba"
+            - "be"
+            - "bg"
+            - "bh"
+            - "bi"
+            - "bm"
+            - "bn"
+            - "bo"
+            - "br"
+            - "bs"
+            - "ca"
+            - "ce"
+            - "ch"
+            - "co"
+            - "cr"
+            - "cs"
+            - "cu"
+            - "cv"
+            - "cy"
+            - "da"
+            - "de"
+            - "dv"
+            - "dz"
+            - "ee"
+            - "el"
+            - "en"
+            - "eo"
+            - "es"
+            - "et"
+            - "eu"
+            - "fa"
+            - "ff"
+            - "fi"
+            - "fj"
+            - "fo"
+            - "fr"
+            - "fy"
+            - "ga"
+            - "gd"
+            - "gl"
+            - "gn"
+            - "gu"
+            - "gv"
+            - "ha"
+            - "he"
+            - "hi"
+            - "ho"
+            - "hr"
+            - "ht"
+            - "hu"
+            - "hy"
+            - "hz"
+            - "ia"
+            - "id"
+            - "ie"
+            - "ig"
+            - "ii"
+            - "ik"
+            - "io"
+            - "is"
+            - "it"
+            - "iu"
+            - "ja"
+            - "jv"
+            - "ka"
+            - "kg"
+            - "ki"
+            - "kj"
+            - "kk"
+            - "kl"
+            - "km"
+            - "kn"
+            - "ko"
+            - "kr"
+            - "ks"
+            - "ku"
+            - "kv"
+            - "kw"
+            - "ky"
+            - "la"
+            - "lb"
+            - "lg"
+            - "li"
+            - "ln"
+            - "lo"
+            - "lt"
+            - "lu"
+            - "lv"
+            - "mg"
+            - "mh"
+            - "mi"
+            - "mk"
+            - "ml"
+            - "mn"
+            - "mr"
+            - "ms"
+            - "mt"
+            - "my"
+            - "na"
+            - "nb"
+            - "nd"
+            - "ne"
+            - "ng"
+            - "nl"
+            - "nn"
+            - "no"
+            - "nr"
+            - "nv"
+            - "ny"
+            - "oc"
+            - "oj"
+            - "om"
+            - "or"
+            - "os"
+            - "pa"
+            - "pi"
+            - "pl"
+            - "ps"
+            - "pt"
+            - "qu"
+            - "rm"
+            - "rn"
+            - "ro"
+            - "ru"
+            - "rw"
+            - "sa"
+            - "sc"
+            - "sd"
+            - "se"
+            - "sg"
+            - "si"
+            - "sk"
+            - "sl"
+            - "sm"
+            - "sn"
+            - "so"
+            - "sq"
+            - "sr"
+            - "ss"
+            - "st"
+            - "su"
+            - "sv"
+            - "sw"
+            - "ta"
+            - "te"
+            - "tg"
+            - "th"
+            - "ti"
+            - "tk"
+            - "tl"
+            - "tn"
+            - "to"
+            - "tr"
+            - "ts"
+            - "tt"
+            - "tw"
+            - "ty"
+            - "ug"
+            - "uk"
+            - "ur"
+            - "uz"
+            - "ve"
+            - "vi"
+            - "vo"
+            - "wa"
+            - "wo"
+            - "xh"
+            - "yi"
+            - "yo"
+            - "za"
+            - "zh"
+            - "zu"
+          type: "string"
+        _id:
+          description: "Primary ID of the piece of content."
+          type: "string"
+        originalMainLangauge:
+          $ref: "#/components/schemas/OTTLanguage.Alpha2LanguageCode"
+          description: "Language the content was originally produced in."
+        firstReleaseDate:
+          description: "The year this piece of content was first released to the public."
+          type: "string"
+          format: "date-time"
+        originCountry:
+          description: "The code of the country where this piece of content was first released/produced to."
+          type: "string"
+        colorScheme:
+          $ref: "#/components/schemas/OTTColorScheme.ColorSchemeSlug"
+          description: "Meta field for the different colour schemes, black and white or color"
+        copyrightLine:
+          description: "Copyright line, just a string"
+          type: "string"
+        ingestedExternalCatalogueId:
+          description: "ID of this piece of content in partner's catalogue"
+          type: "string"
+        originalReleaseFormat:
+          $ref: "#/components/schemas/OTTOriginalReleaseFormat.OriginalReleaseFormatSlug"
+          description: "Meta to describe how this piece of content was first released to the public."
+        shortDescription:
+          description: "Short description about the piece of content."
+          type: "string"
+        synopsis:
+          description: "Synopsis is different to short description"
+          type: "string"
+        metadataPublished:
+          description: "Whether the metadata should be publishable or not.\nIf not present on serial, then a series and episodes will not be published."
+          type: "boolean"
+          enum:
+            - true
+        vendorContentAgreement:
+          $ref: "#/components/schemas/OTTVendorContentAgreement.AgreementSlug"
+          description: "How has this OTT vendor got hold of this piece of content?"
+        imdbId:
+          description: "IMDB ID of the content"
+          type: "string"
+        eanId:
+          description: "EAN Id string"
+          type: "string"
+        asinId:
+          description: "ASIN Id"
+          type: "string"
+        gvdId:
+          description: "Gracenote Id"
+          type: "string"
+        eidrId:
+          description: "EIDR ID"
+          type: "string"
+        serialDisplayType:
+          $ref: "#/components/schemas/OTTSerialDisplayType.SerialDisplayType"
+          description: "How should this serial be displayed?"
+        order:
+          description: "Simple ordering of the content."
+          type: "integer"
+          minimum: 0
+        dateAddedToPlatform:
+          description: "Date this piece of content was added to the platform."
+          type: "number"
+        mainImageId1:
+          description: "Id of the main poster image in the image service."
+          type: "integer"
+          minimum: 0
+        contentRatings:
+          description: "Content ratings\nInherited across child content."
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OTTContentRatingBoard.RatingPair"
+        triggerWarnings:
+          description: "Array of trigger warning slugs this piece of content has.\nInherrited across child content."
+          type: "array"
+          items:
+            enum:
+              - "BLOOD"
+              - "SEXUAL_VIOLENCE"
+              - "STROBE_LIGHTING"
+            type: "string"
 paths:
   /content/{id}/v1:
     get:
+      summary: "Retrieve content from a row of content"
       parameters:
         - name: "id"
           in: "path"
           required: true
           description: "Id of the piece of content to get."
           schema:
-            type: "integer"
+            type: "string"
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Get-Individual-Content-0b9649e8d0a44970bc77142731835208"
+        description: "Notion"
       responses:
         200:
-          description: "got the content successfully."
+          description: "Retrieved the content successfully."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SERIAL"
-        400:
-          description: "there was an error getting the content"
+                $ref: "#/components/schemas/OTTCommonContentMeta.Core"
         404:
-          description: "could not find the content"
+          description: "Could not find the content."
+    patch:
+      summary: "Update (a) field(s) for a piece of content."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Update-Content-494bafd6396f438ba9c039c63b8f66ce"
+        description: "Notion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Id of the piece of content to update."
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OTTCommonContentMeta.Core"
+      responses:
+        200:
+          description: "Updated the content successfully."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OTTCommonContentMeta.Core"
+        400:
+          description: "At least 1 parameter that was set was invalid."
+        404:
+          description: "Could not find the content."
+    delete:
+      summary: "Delete a piece of content to remove it from the DB."
+      description: "This will cause cascade deletes from the from service - deleting a serial will delete the episodes within it."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Delete-a-Content-fd351e74d00b43768139aed5ad140ada"
+        description: "Notion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Id of the piece of content to delete."
+          schema:
+            type: "string"
+      responses:
+        204:
+          description: "Content deleted ok."
+        404:
+          description: "Could not find the content to delete it."
+  /content/v1:
+    post:
+      summary: "Add a new piece of content."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Create-a-new-piece-of-content-3eb6a425d34f4bd4b378238144cb3baa"
+        description: "Notion"
+      responses:
+        201:
+          description: "Content was created successfully."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OTTCommonContentMeta.Core"
+        400:
+          description: "At least 1 parameter was invalid"
+  /content/{id}/serial-parts/v1:
+    get:
+      summary: "Retrieve the serial parts of a piece of content."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Get-Content-s-Serial-Parts-2903a6a2319c403b88b632cf22d99e5e"
+        description: "Notion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Id of the piece of content to query."
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Array of serial parts. Can be empty array."
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/SERIAL_PART"
+        400:
+          description: "Perhaps the requested ID cannot have serial parts."
+  /content/{id}/serial-episodes/v1:
+    get:
+      summary: "Retrieve the serial episodes from a series part."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Get-Content-s-Serial-Episodes-f961a70290094d11ba27dc837b067c7f"
+        description: "Notion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Id of the piece of content to query."
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Array of special episodes. Can be empty array."
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/SERIAL_EPISODE"
+        400:
+          description: "Perhaps the requested ID cannot have serial episodes."
+        404:
+          description: "The piece of content with ID was not found."
+  /content/{id}/special-episodes/v1:
+    get:
+      summary: "Retrieve the special episodes from a piece of content."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Get-Content-s-Special-Episodes-e4528827f2bb478db2d9a09ff386fb97"
+        description: "Notion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Id of the piece of content to query."
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Array of special episodes. Can be empty array."
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/SPECIAL_EPISODE"
+        400:
+          description: "Perhaps the requested ID cannot have serial episodes."
+        404:
+          description: "The piece of content with ID was not found."
+  /content/v1/page:
+    post:
+      summary: "Create a new page of content and return it to the client."
+      externalDocs:
+        url: "https://www.notion.so/fxdigital/Get-a-filtered-page-of-content-baa917ea97a54b98ab97746c54ff0b0a"
+        description: "Notion"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CONTENT_PAGE_REQUEST"
+      responses:
+        200:
+          description: "Successfully retrieved a page of content to display."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CONTENT_PAGE_RESPONSE"
+        400:
+          description: "At least 1 parameter was invalid"
